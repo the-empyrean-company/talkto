@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat with {{ bot.capitalize() }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="chat">
+  <header>
+    <h2>Chat with {{ bot.capitalize() }}</h2>
+  </header>
+  <main id="chatbox"></main>
+  <form id="chat-form">
+    <input type="text" id="message" placeholder="Type a message..." required>
+    <button type="submit">Send</button>
+  </form>
+  <script>
+    const bot = "{{ bot }}";
+  </script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

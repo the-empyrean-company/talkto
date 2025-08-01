@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journey</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="home">
+  <h1>Journey</h1>
+  <div class="character-selection">
+    <a href="{{ url_for('chat_page', bot='freud') }}" class="character-card">
+      <img src="https://img.icons8.com/emoji/96/person-in-suit-levitating.png" alt="Sigmund">
+      <p>Sigmund</p>
+    </a>
+    <a href="{{ url_for('chat_page', bot='socrates') }}" class="character-card">
+      <img src="https://img.icons8.com/emoji/96/old-man-light-skin-tone.png" alt="Socrates">
+      <p>Socrates</p>
+    </a>
+  </div>
+</body>
+</html>
