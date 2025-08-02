@@ -1,100 +1,69 @@
 body {
   margin: 0;
-  font-family: 'Georgia', serif;
-  background: linear-gradient(to bottom, #e7ba84, #c98e56);
-  color: #3d2e1e;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #0d1117;
+  color: #e6edf3;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-.home h1 {
-  font-size: 3rem;
-  margin-top: 2rem;
-  font-style: italic;
-  letter-spacing: 0.2rem;
-}
-
-.character-selection {
-  display: flex;
-  gap: 2rem;
-  margin-top: 3rem;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.character-card {
-  background: #e5bb7e;
   padding: 2rem;
-  border-radius: 1.5rem;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  overflow-x: hidden;
+}
+
+.welcome-text {
+  font-size: 2rem;
   text-align: center;
-  text-decoration: none;
-  color: inherit;
-  transition: transform 0.2s ease;
+  animation: fadeIn 2s ease-in-out;
 }
 
-.character-card:hover {
-  transform: scale(1.05);
+.swiper {
+  width: 100%;
+  max-width: 1000px;
+  padding: 50px 5%;
+  box-sizing: border-box;
 }
 
-.character-card p {
-  font-size: 1.2rem;
-  font-style: italic;
-  margin-top: 1rem;
-}
-
-/* Chat page */
-.chat header {
-  margin: 1rem 0;
-}
-
-#chatbox {
-  width: 90%;
-  max-width: 600px;
-  height: 60vh;
-  overflow-y: auto;
-  background: #fff4e0;
-  border-radius: 1rem;
-  padding: 1rem;
-  margin-bottom: 1rem;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.1);
-}
-
-.message {
-  margin-bottom: 1rem;
-}
-
-.user {
-  text-align: right;
-  font-weight: bold;
-}
-
-.bot {
-  text-align: left;
-  font-style: italic;
-}
-
-form {
+.swiper-wrapper {
   display: flex;
-  gap: 0.5rem;
-  width: 90%;
-  max-width: 600px;
 }
 
-input[type=\"text\"] {
-  flex: 1;
-  padding: 0.8rem;
-  border-radius: 0.8rem;
-  border: none;
-  font-size: 1rem;
+.swiper-slide {
+  background-color: #161b22;
+  color: #e6edf3;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 260px;              /* ✅ smaller, compact cards */
+  height: auto;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  opacity: 0.6;
+  transform: scale(0.95);
 }
 
-button {
-  padding: 0.8rem 1.2rem;
-  background-color: #a86d3d;
-  color: white;
-  border: none;
-  border-radius: 0.8rem;
-  cursor: pointer;
+.swiper-slide.active-slide {
+  opacity: 1;
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.swiper-slide h2 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.swiper-slide p {
+  font-size: 0.95rem;
+  color: #8b949e;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }

@@ -2,21 +2,46 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Journey</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Talkto – Talk about your day</title>
+
+  <!-- ✅ Swiper CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.css"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
-<body class="home">
-  <h1>Journey</h1>
-  <div class="character-selection">
-    <a href="{{ url_for('chat_page', bot='freud') }}" class="character-card">
-      <img src="https://img.icons8.com/emoji/96/person-in-suit-levitating.png" alt="Sigmund">
-      <p>Sigmund</p>
-    </a>
-    <a href="{{ url_for('chat_page', bot='socrates') }}" class="character-card">
-      <img src="https://img.icons8.com/emoji/96/old-man-light-skin-tone.png" alt="Socrates">
-      <p>Socrates</p>
-    </a>
+
+<body>
+  <h1 class="welcome-text">Welcome to Talkto.<br><br>Which kind of conversation do you need today?</h1>
+
+  <!-- ✅ Swiper structure -->
+  <div class="swiper">
+    <div class="swiper-wrapper">
+
+      <div class="swiper-slide">
+        <h2>I need to untangle my thoughts</h2>
+        <p>Clarify what you really think through guided questions. Socratic-style dialogue that sharpens your mind.</p>
+      </div>
+
+      <div class="swiper-slide">
+        <h2>I just need someone to listen</h2>
+        <p>Feel heard without judgment. A calm, Rogerian mirror that reflects your emotions back to you.</p>
+      </div>
+
+      <div class="swiper-slide">
+        <h2>I want to do a sanity check</h2>
+        <p>Test your reasoning with clarity and structure. Spot fallacies and sharpen your logic.</p>
+      </div>
+
+      <div class="swiper-slide">
+        <h2>I want to explore an idea</h2>
+        <p>Let’s bring your half-formed thoughts to life. The midwife of ideas, helping things emerge through dialogue.</p>
+      </div>
+    </div>
   </div>
+<script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
