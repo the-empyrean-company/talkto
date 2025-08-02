@@ -6,18 +6,44 @@
   <title>Chat with {{ bot.capitalize() }}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
-<body class="chat">
-  <header>
-    <h2>Chat with {{ bot.capitalize() }}</h2>
-  </header>
-  <main id="chatbox"></main>
-  <form id="chat-form">
-    <input type="text" id="message" placeholder="Type a message..." required>
-    <button type="submit">Send</button>
-  </form>
-  <script>
-    const bot = "{{ bot }}";
-  </script>
+
+<body>
+
+  <!-- NEW: Toggle for small screens -->
+  <button id="toggle-context" class="toggle-context">💡 Style Info</button>
+  <button class="back-btn" onclick="window.location.href='/'">← Back</button>
+  <div class="chat-layout">
+
+    <!-- RIGHT (context) now appears first for mobile -->
+    <div class="chat-right collapsible">
+      <h3 class="context-heading">{{ bot.capitalize() }} Style</h3>
+      <p class="context-desc">
+        {% if bot == 'socratic' %}
+          “The unexamined life is not worth living.”<br>Socratic method: explore your beliefs through questioning.
+        {% elif bot == 'rogerian' %}
+          “What is most personal is most universal.”<br>Rogerian style: reflective, empathic listening.
+        {% elif bot == 'logical' %}
+          “Logic is the anatomy of thought.”<br>Test your reasoning clearly and calmly.
+        {% elif bot == 'maieutic' %}
+          “Midwife of ideas.”<br>Help your own thoughts come to life through gentle guidance.
+        {% endif %}
+      </p>
+    </div>
+
+    <!-- LEFT: Chat -->
+    <div class="chat-left">
+      <h2 class="chat-heading">Talking to the {{ bot.capitalize() }} bot</h2>
+
+      <div id="chatbox" class="chatbox"></div>
+
+      <form id="chat-form" class="chat-form">
+        <input type="text" id="message" placeholder="Type your message..." autocomplete="off" />
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
+

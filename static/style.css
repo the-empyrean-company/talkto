@@ -67,3 +67,137 @@ body {
     transform: translateY(0);
   }
 }
+/* === Chat Page Layout === */
+
+.chat-layout {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+  gap: 2rem;
+  padding: 2rem;
+  box-sizing: border-box;
+}
+
+.chat-left, .chat-right {
+  background-color: #161b22;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.chat-left {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-right {
+  flex: 1;
+}
+
+.chat-heading {
+  margin-bottom: 1rem;
+}
+
+.chatbox {
+  flex-grow: 1;
+  overflow-y: auto;
+  max-height: 400px;
+  margin-bottom: 1rem;
+}
+
+.chat-form {
+  display: flex;
+  gap: 1rem;
+}
+
+.chat-form input {
+  flex: 1;
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: none;
+  background-color: #0d1117;
+  color: #e6edf3;
+}
+
+.chat-form button {
+  padding: 0.75rem 1rem;
+  background-color: #238636;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.message {
+  margin: 0.5rem 0;
+}
+
+.message.user {
+  text-align: right;
+  color: #c9d1d9;
+}
+
+.message.bot {
+  text-align: left;
+  color: #8b949e;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: #58a6ff;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.context-heading {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.context-desc {
+  color: #8b949e;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+/* === Mobile Support === */
+
+@media (max-width: 768px) {
+  .chat-layout {
+    flex-direction: column;
+  }
+
+  .chat-right {
+    width: 100%;
+    order: -1;
+    margin-bottom: 1rem;
+    max-height: 300px;
+    overflow-y: auto;
+    transition: max-height 0.3s ease;
+  }
+
+  .chat-right.collapsed {
+    max-height: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .toggle-context {
+    display: block;
+    background: none;
+    color: #58a6ff;
+    border: none;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+  }
+}
+
+/* On desktop: hide toggle button */
+.toggle-context {
+  display: none;
+}
