@@ -19,20 +19,20 @@
       <h3 class="context-heading">{{ bot.capitalize() }} Style</h3>
       <p class="context-desc">
         {% if bot == 'socratic' %}
-          “The unexamined life is not worth living.”<br>Socratic method: explore your beliefs through questioning.
+          “The unexamined life is not worth living.”<br>Socratic style: explore your beliefs through questioning.
         {% elif bot == 'rogerian' %}
           “What is most personal is most universal.”<br>Rogerian style: reflective, empathic listening.
         {% elif bot == 'logical' %}
           “Logic is the anatomy of thought.”<br>Test your reasoning clearly and calmly.
         {% elif bot == 'maieutic' %}
-          “Midwife of ideas.”<br>Help your own thoughts come to life through gentle guidance.
+          Help your own thoughts come to life through gentle guidance.
         {% endif %}
       </p>
     </div>
 
     <!-- LEFT: Chat -->
     <div class="chat-left">
-      <h2 class="chat-heading">Talking to the {{ bot.capitalize() }} bot</h2>
+      <h2 class="chat-heading">Ask a question</h2>
 
       <div id="chatbox" class="chatbox"></div>
 
@@ -42,7 +42,10 @@
       </form>
     </div>
   </div>
-
+<script>
+  window.USER_ID     = "{{ user_id }}";
+  window.CURRENT_BOT = "{{ bot }}";
+</script>
   <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

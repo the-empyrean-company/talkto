@@ -37,13 +37,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // === Chat logic ===
-  const form = document.getElementById("chat-form");
+    // === Chat logic ===
+  const form    = document.getElementById("chat-form");
   const chatbox = document.getElementById("chatbox");
-  const input = document.getElementById("message");
+  const input   = document.getElementById("message");
 
   if (form && chatbox && input) {
-    const bot = new URLSearchParams(window.location.search).get("bot") || "socratic";
+    // these globals must be set in your chat.html before loading script.js:
+    //   <script>
+    //     window.USER_ID     = "{{ user_id }}";
+    //     window.CURRENT_BOT = "{{ bot }}";
+    //   </script>
+    const userId = window.USER_ID;
+    const bot    = window.CURRENT_BOT ||
+                   new URLSearchParams(window.location.search).get("bot") ||
+                   "socratic";
 
     form.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -54,14 +62,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
       const res = await fetch("/chat", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ message: userMessage, bot })
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          user_id: userId,
+          bot:      bot,
+          message:  userMessage
+        })
       });
-
       const data = await res.json();
+
+      if (data.stop) {
+        // token cap hit → kick off Stripe
+        const goPay = confirm(data.message + "\nPress OK to donate now.");
+        if (goPay) window.location.href = data.checkout_url;
+        return;
+      }
+
+      // show AI reply and update token badge
       appendMessage(capitalize(bot), data.reply, "bot");
+      updateTokenCounter(data.tokens_used);
+
       input.value = "";
       chatbox.scrollTop = chatbox.scrollHeight;
     });
@@ -75,6 +95,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function capitalize(str) {
       return str.charAt(0).toUpperCase() + str.slice(1);
+    }
+
+    function updateTokenCounter(count) {
+      let badge = document.getElementById("token-count");
+      if (!badge) {
+        badge = document.createElement("div");
+        badge.id = "token-count";
+        badge.className = "token-badge";
+        // insert it above the chatbox
+        chatbox.parentNode.insertBefore(badge, chatbox);
+      }
+      badge.innerText = `Tokens used: ${count}`;
     }
 
     input.focus();
