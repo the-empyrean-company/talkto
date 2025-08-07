@@ -8,39 +8,56 @@
 </head>
 
 <body>
-
   <!-- NEW: Toggle for small screens -->
-  <button id="toggle-context" class="toggle-context">💡 Style Info</button>
-  <button class="back-btn" onclick="window.location.href='/'">← Back</button>
+    <button class="back-btn" onclick="window.location.href='/'" aria-label="Go back">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+           stroke-width="1.5" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round"
+              d="m11.25 9-3 3m0 0 3 3m-3-3h7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+    </button>
   <div class="chat-layout">
+    <!-- LEFT (context) now appears first for mobile -->
 
-    <!-- RIGHT (context) now appears first for mobile -->
-    <div class="chat-right collapsible">
-      <h3 class="context-heading">{{ bot.capitalize() }} Style</h3>
+    <details class="chat-left summary">
+      <summary class="context-heading">About the {{ bot.capitalize() }} style conversation</summary>
       <p class="context-desc">
         {% if bot == 'socratic' %}
-          “The unexamined life is not worth living.”<br>Socratic style: explore your beliefs through questioning.
+          “The unexamined life is not worth living.”<br>Explore your beliefs through questioning.
+          <p class="context-desc">Imagine Socrates in a sunny Athenian courtyard, guiding friends with simple, sharp questions—“What is justice?” “How can you be sure?”—like a gardener tending to hidden ideas, helping them bloom into clarity.</p>
+          <p class="context-desc">Today, that same spirit lives on in lively classroom talks, thoughtful therapy sessions, and spirited law debates. By welcoming “I don’t know,” we turn curiosity into our compass, sailing toward a life lived on purpose and with wonder.</p>
+          <p class="context-desc2"><i>If you’re struggling with mental health, contact your local authority or crisis services. Please do not share personal or sensitive information.</i></p>
         {% elif bot == 'rogerian' %}
-          “What is most personal is most universal.”<br>Rogerian style: reflective, empathic listening.
+          “What is most personal is most universal.”<br>Reflective, empathic listening.
+          <p class="context-desc">Picture Carl Rogers in a cozy room, leaning in with gentle eyes, echoing your words like ripples on a still pond: “So you’re feeling…” Through his simple act of reflection, your own story finds its true voice and you discover that your unique struggle touches the heart of human experience.</p>
+          <p class="context-desc">Today, that same warmth guides conversations from therapy chairs to team meetings. By truly hearing another—and by daring to share our own truths—we weave a shared tapestry of understanding, reminding us that in every personal tale lies the thread that binds us all.</p>
+          <p class="context-desc2"><i>If you’re struggling with mental health, contact your local authority or crisis services. Please do not share personal or sensitive information.</i></p>
         {% elif bot == 'logical' %}
           “Logic is the anatomy of thought.”<br>Test your reasoning clearly and calmly.
-        {% elif bot == 'maieutic' %}
+          <p class="context-desc">Envision Aristotle in his Lyceum, dissecting ideas with the precision of a scalpel: “Does this premise hold?” “Where does this inference lead?” Through his calm examination, each argument reveals its inner structure, laying bare the pathways of sound judgment.</p>
+          <p class="context-desc">Today, that same clarity guides debates in boardrooms and debates in daily life. By examining our assumptions and tracing each step of our reasoning, we build ideas as sturdy as well-crafted bridges—ensuring our conclusions stand firm under scrutiny.</p>
+          <p class="context-desc2"><i>If you’re struggling with mental health, contact your local authority or crisis services. Please do not share personal or sensitive information.</i></p>
+        {% elif bot == 'creative' %}
           Help your own thoughts come to life through gentle guidance.
+          <p class="context-desc">Imagine you’re about to sketch a vibrant community mural and you call on your creative sparring partner. They fire off the opening question: “What story should this wall whisper to passersby?”
+          <p class="context-desc">This electric, question-driven dance works wonders for every spark of inspiration.
         {% endif %}
       </p>
-    </div>
+    </details>
 
-    <!-- LEFT: Chat -->
-    <div class="chat-left">
-      <h2 class="chat-heading">Ask a question</h2>
+    <!-- RIGHT: Chat -->
+
+    <div class="chat-right">
+      <h2 class="chat-heading">What's on your mind?</h2>
 
       <div id="chatbox" class="chatbox"></div>
 
       <form id="chat-form" class="chat-form">
-        <input type="text" id="message" placeholder="Type your message..." autocomplete="off" />
+        <input type="text" id="message" placeholder="Ask a question or share a thought..." autocomplete="off" />
         <button type="submit">Send</button>
       </form>
     </div>
+
   </div>
 <script>
   window.USER_ID     = "{{ user_id }}";

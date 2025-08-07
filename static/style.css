@@ -84,30 +84,35 @@ body {
 /* === Chat Page Layout === */
 
 .chat-layout {
-  display: flex;
+  display: grid;
   justify-content: center;
   width: 100%;
   max-width: 1200px;
   gap: 2rem;
   padding: 2rem;
   box-sizing: border-box;
+  grid-template-areas:
+    "left"
+    "right"
 }
 
-.chat-left, .chat-right {
+.chat-right, .chat-left {
   background-color: #161b22;
   border-radius: 12px;
   padding: 2rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 
-.chat-left {
+.chat-right {
   flex: 2;
   display: flex;
   flex-direction: column;
+  grid-area: right;
 }
 
-.chat-right {
+.chat-left {
   flex: 1;
+  grid-area: left;
 }
 
 .chat-heading {
@@ -158,14 +163,30 @@ body {
   color: #8b949e;
 }
 
+  /* Make the summary a flex container so the button sits neatly at the start */
+  .chat-left summary::marker {
+    display: flex;
+    align-items: center;
+  }
+
 .back-btn {
+  display: inline-flex;
   background: none;
   border: none;
   color: #58a6ff;
   font-size: 1rem;
   margin-bottom: 1rem;
   cursor: pointer;
+  width: 3rem;                 /* 24px */
+  height: 3rem;                /* 24px */
+  margin-right: 0.5rem;
 }
+/* Make the SVG fill the button but not overflow */
+  .back-btn svg {
+    width: 100%;
+    height: 100%;
+    pointer-events: none;          /* let the button, not the SVG, receive the click */
+  }
 
 .context-heading {
   font-size: 1.2rem;
@@ -177,15 +198,21 @@ body {
   font-size: 0.95rem;
   line-height: 1.4;
 }
+.context-desc2 {
+  color: #8b949e;
+  font-size: 0.70rem;
+  line-height: 1.4;
+}
 
 /* === Mobile Support === */
 
 @media (max-width: 768px) {
   .chat-layout {
+    display: flex;
     flex-direction: column;
   }
 
-  .chat-right {
+  .chat-left {
     width: 100%;
     order: -1;
     margin-bottom: 1rem;
@@ -194,7 +221,7 @@ body {
     transition: max-height 0.3s ease;
   }
 
-  .chat-right.collapsed {
+  .chat-left.collapsed {
     max-height: 0;
     padding: 0;
     overflow: hidden;
